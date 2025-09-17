@@ -1,13 +1,6 @@
 {
   "functions": {
-    "app/api/edit-image/route.ts": {
-      "maxDuration": 300
-    },
-    "app/api/generate-video/route.ts": {
-      "maxDuration": 300
-    }
-  },
-  "env": {
-    "FAL_KEY": "@FAL_KEY"
+    "app/api/edit-image/route.ts": { "maxDuration": 300 },
+    "app/api/generate-video/route.ts": { "maxDuration": 300 }
   }
 }
