@@ -749,7 +749,8 @@ export default function LiquidEther({
       update(args?: UpdateArgs): THREE.WebGLRenderTarget | undefined {
         const { viscous, iterations, dt } = args || {};
         if (!this.uniforms) return;
-        let fbo_in: THREE.WebGLRenderTarget, fbo_out: THREE.WebGLRenderTarget;
+        let fbo_in: THREE.WebGLRenderTarget;
+        let fbo_out: THREE.WebGLRenderTarget = this.props.output1!; // Initialize with default value
         if (typeof viscous === 'number') this.uniforms.v.value = viscous;
         const iter = iterations ?? 0;
         for (let i = 0; i < iter; i++) {
@@ -816,7 +817,8 @@ export default function LiquidEther({
       }
       update(args?: UpdateArgs): THREE.WebGLRenderTarget | undefined {
         const { iterations } = args || {};
-        let p_in: THREE.WebGLRenderTarget, p_out: THREE.WebGLRenderTarget;
+        let p_in: THREE.WebGLRenderTarget;
+        let p_out: THREE.WebGLRenderTarget = this.props.output1!; // Initialize with default value
         const iter = iterations ?? 0;
         for (let i = 0; i < iter; i++) {
           if (i % 2 === 0) {
