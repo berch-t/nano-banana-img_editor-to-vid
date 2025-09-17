@@ -576,7 +576,7 @@ export default function LiquidEther({
       init() {
         this.scene = new THREE.Scene();
         this.camera = new THREE.Camera();
-        if (this.uniforms) {
+        if (this.uniforms && this.props.material) {
           this.material = new THREE.RawShaderMaterial(this.props.material);
           this.geometry = new THREE.PlaneGeometry(2, 2);
           this.plane = new THREE.Mesh(this.geometry, this.material);
@@ -623,7 +623,7 @@ export default function LiquidEther({
           },
           output: simProps.dst
         });
-        this.uniforms = this.props.material.uniforms;
+        this.uniforms = this.props.material?.uniforms;
         this.init();
       }
       init() {
