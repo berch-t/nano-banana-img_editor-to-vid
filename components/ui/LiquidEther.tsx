@@ -656,11 +656,13 @@ export default function LiquidEther({
 
     class ExternalForce extends ShaderPass {
       mouse!: THREE.Mesh;
+      private simProps: SimProps;
       constructor(simProps: SimProps) {
         super({ output: simProps.dst });
-        this.init(simProps);
+        this.simProps = simProps;
+        this.init();
       }
-      init(simProps: SimProps) {
+      init() {
         super.init();
         const mouseG = new THREE.PlaneGeometry(1, 1);
         const mouseM = new THREE.RawShaderMaterial({
@@ -669,10 +671,10 @@ export default function LiquidEther({
           blending: THREE.AdditiveBlending,
           depthWrite: false,
           uniforms: {
-            px: { value: simProps.cellScale },
+            px: { value: this.simProps.cellScale },
             force: { value: new THREE.Vector2(0, 0) },
             center: { value: new THREE.Vector2(0, 0) },
-            scale: { value: new THREE.Vector2(simProps.cursor_size, simProps.cursor_size) }
+            scale: { value: new THREE.Vector2(this.simProps.cursor_size || 0, this.simProps.cursor_size || 0) }
           }
         });
         this.mouse = new THREE.Mesh(mouseG, mouseM);
