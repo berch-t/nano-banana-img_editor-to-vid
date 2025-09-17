@@ -605,6 +605,27 @@ export default function LiquidEther({
       src_v?: THREE.WebGLRenderTarget;
     }
 
+    interface ViscousSimProps extends SimProps {
+      dst_: THREE.WebGLRenderTarget;
+      boundarySpace: THREE.Vector2;
+      viscous: number;
+    }
+
+    interface DivergenceSimProps extends SimProps {
+      boundarySpace: THREE.Vector2;
+    }
+
+    interface PoissonSimProps extends SimProps {
+      dst_: THREE.WebGLRenderTarget;
+      boundarySpace: THREE.Vector2;
+    }
+
+    interface PressureSimProps extends SimProps {
+      boundarySpace: THREE.Vector2;
+      src_p: THREE.WebGLRenderTarget;
+      src_v: THREE.WebGLRenderTarget;
+    }
+
     class Advection extends ShaderPass {
       line!: THREE.LineSegments;
       constructor(simProps: SimProps) {
@@ -705,7 +726,7 @@ export default function LiquidEther({
     }
 
     class Viscous extends ShaderPass {
-      constructor(simProps: SimProps) {
+      constructor(simProps: ViscousSimProps) {
         super({
           material: {
             vertexShader: face_vert,
@@ -749,7 +770,7 @@ export default function LiquidEther({
     }
 
     class Divergence extends ShaderPass {
-      constructor(simProps: SimProps) {
+      constructor(simProps: DivergenceSimProps) {
         super({
           material: {
             vertexShader: face_vert,
@@ -775,7 +796,7 @@ export default function LiquidEther({
     }
 
     class Poisson extends ShaderPass {
-      constructor(simProps: SimProps) {
+      constructor(simProps: PoissonSimProps) {
         super({
           material: {
             vertexShader: face_vert,
@@ -814,7 +835,7 @@ export default function LiquidEther({
     }
 
     class Pressure extends ShaderPass {
-      constructor(simProps: SimProps) {
+      constructor(simProps: PressureSimProps) {
         super({
           material: {
             vertexShader: face_vert,
