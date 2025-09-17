@@ -11,6 +11,8 @@ import VideoDisplay from '@/components/VideoDisplay';
 import PhotoshopEditor from '@/components/PhotoshopEditor';
 import TimeTravelEditor from '@/components/TimeTravelEditor';
 import TimeTravelDisplay from '@/components/TimeTravelDisplay';
+import LightRays from '@/components/ui/LightRays';
+import LiquidEther from '@/components/ui/LiquidEther';
 import { generateTimeTravelStagesWithLLM } from '@/utils/timeTravelDynamicPrompts';
 
 export default function Home() {
@@ -290,11 +292,58 @@ export default function Home() {
 
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <div className="container mx-auto p-6">
-        <h1 className="text-3xl font-bold text-center mb-8">
-          Nano Banana - AI Image Editor & Video Generator
-        </h1>
+    <div className="min-h-screen bg-background text-foreground relative overflow-hidden">
+      {/* Background Liquid Ether */}
+      <div className="absolute inset-0 opacity-60">
+        <LiquidEther
+          colors={['#D4AF37', '#FF8C00', '#CC5500']}
+          mouseForce={65}
+          cursorSize={180}
+          isViscous={true}
+          viscous={30}
+          iterationsViscous={32}
+          iterationsPoisson={32}
+          resolution={0.8}
+          isBounce={false}
+          autoDemo={true}
+          autoSpeed={0.2}
+          autoIntensity={0.8}
+          takeoverDuration={0.5}
+          autoResumeDelay={1000}
+          autoRampDuration={1.8}
+        />
+      </div>
+
+      {/* Background Light Rays */}
+      <div className="absolute inset-0 opacity-80">
+        <LightRays
+          raysOrigin="top-center"
+          raysColor="#d18e00"
+          raysSpeed={0.5}
+          lightSpread={1.2}
+          rayLength={1.8}
+          pulsating={true}
+          fadeDistance={1}
+          saturation={0.8}
+          followMouse={true}
+          mouseInfluence={0.15}
+          noiseAmount={0.1}
+          distortion={0.1}
+        />
+      </div>
+
+      <div className="container mx-auto p-6 relative z-10">
+        {/* Modern header with logo */}
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <img
+            src="/logo.png"
+            alt="Nano Banana Logo"
+            className="w-16 h-16 object-contain"
+          />
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 bg-clip-text text-transparent">
+            Banana Smoke - Image Edit & Video Gen
+          </h1>
+        </div>
         <p className="text-center text-muted-foreground mb-8">
           {mode === 'single' 
             ? 'Transform your images with Google\'s Nano Banana model using natural language prompts'
